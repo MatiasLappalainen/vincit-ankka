@@ -10,7 +10,7 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
     super(props);
 
     this.state = {
-      description: ""
+      description: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,7 +28,6 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
   handleClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     const description = parseInt(this.state.description, 10);
-    console.log(description);
   }
 
   render() {
