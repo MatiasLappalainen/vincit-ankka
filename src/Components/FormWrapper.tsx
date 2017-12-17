@@ -32,14 +32,17 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
 
   render() {
     return (
-      <form>
+      <form className="form-inline">
+        <div>
         <TextField
           name="description"
           onChange={this.handleChange}
+          variant="form-control"
           value={this.state.description}
           type="text"
         />
-        <button onClick={(e) => this.handleClick(e)}>Submit</button>
+        <button className="btn btn-primary" onClick={(e) => this.handleClick(e)}>Submit</button>
+        </div>
       </form>
     );
   }
