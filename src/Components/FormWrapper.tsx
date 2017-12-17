@@ -9,14 +9,14 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
   constructor(props: any) {
     super(props);
 
+    this.handleChange = this.handleChange.bind(this);
+
     this.state = {
       description: ''
     };
-
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e: React.FormEvent<HTMLInputElement>) {
+  handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
     const value: string = target.value;
     const name: any = target.name;
@@ -25,9 +25,9 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
     });
   }
 
-  handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+  handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const description = parseInt(this.state.description, 10);
+    // const description = parseInt(this.state.description, 10);
   }
 
   render() {
@@ -35,7 +35,7 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
       <form>
         <TextField
           name="description"
-          onChange={this.handleChange.bind(this)}
+          onChange={this.handleChange}
           value={this.state.description}
           type="text"
         />
