@@ -18,6 +18,7 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
     };
   }
 
+  // Handle Changes on textField
   handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
     const value: string = target.value;
@@ -26,7 +27,7 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
       [name]: value
     });
   }
-
+  // Load form
   handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const TextField = AsyncRouteComponent.default(() => import('./TextField'));
@@ -34,7 +35,7 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
       Component: TextField
     });
   }
-
+  // Send data to checkData function
   handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
   }

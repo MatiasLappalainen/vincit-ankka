@@ -5,7 +5,10 @@ interface AsyncRouteComponentState {
 }
 
 const AsyncRouteComponent = (loader: () => any) => {
-  class AsyncRouteComponent extends React.Component <{}, AsyncRouteComponentState>{
+  class AsyncRouteComponent extends React.Component<
+    {},
+    AsyncRouteComponentState
+  > {
     constructor(props: any) {
       super(props);
 
@@ -15,9 +18,10 @@ const AsyncRouteComponent = (loader: () => any) => {
     }
 
     async componentDidMount() {
-        const { default: Component }  = await loader();
+      // Load Component and set as default
+      const { default: Component } = await loader();
 
-        this.setState({ Component: Component });
+      this.setState({ Component: Component });
     }
 
     render() {

@@ -1,0 +1,12 @@
+.drop-active {
+    display: block;
+    height: 100px;
+    overflow-x: auto;
+    transition: all linear 1s;
+}
+
+.drop-deactive {
+    display: none;
+    height: 0px;
+    transition: all linear 1s;
+}
