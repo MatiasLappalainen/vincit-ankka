@@ -1,9 +1,8 @@
 import * as React from 'react';
 import './App.css';
 
-/* import FormWrapper from './Components/FormWrapper'; */
-import { Home, Form } from './Components/routes';
-import { Route } from 'react-router-dom';
+import Home from './Components/Home';
+import FormWrapper from './Components/FormWrapper';
 
 
 class App extends React.Component {
@@ -16,8 +15,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App container">
-        <Route exact={true} path="/" component={Home} />
-        <Route exact={true} path="/add" component={Form} />
+        <Home />
+        <FormWrapper />
       </div>
     );
   }

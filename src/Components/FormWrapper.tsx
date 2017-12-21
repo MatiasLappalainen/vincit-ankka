@@ -1,8 +1,9 @@
 import * as React from "react";
-import TextField from "./TextField";
+import * as AsyncRouteComponent from './AsyncRouteComponent';
 
 interface FormWrapperState {
   description: string;
+  Component: any;
 }
 
 class FormWrapper extends React.Component<{}, FormWrapperState> {
@@ -12,7 +13,8 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      description: ''
+      description: '',
+      Component: null,
     };
   }
 
@@ -27,21 +29,30 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
 
   handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // const description = parseInt(this.state.description, 10);
+    const TextField = AsyncRouteComponent.default(() => import('./TextField'));
+    this.setState({
+      Component: TextField
+    });
+  }
+
+  handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
   }
 
   render() {
+    const {Component} = this.state;
     return (
       <form className="form-inline">
+      <button className="btn btn-danger" onClick={(e) => this.handleClick(e)}>Add Duck</button>
         <div>
-        <TextField
+        {Component !== null ? <Component
           name="description"
           onChange={this.handleChange}
           variant="form-control"
           value={this.state.description}
           type="text"
-        />
-        <button className="btn btn-primary" onClick={(e) => this.handleClick(e)}>Submit</button>
+        /> : <h1>Loading</h1>}
+        <button className="btn btn-primary" onClick={(e) => this.handleSubmit(e)}>Submit</button>
         </div>
       </form>
     );

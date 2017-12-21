@@ -1,8 +1,12 @@
-import * as React from 'react';
+import * as React from "react";
 
-const AsyncRouteComponent = (loader: any) => {
-  class AsyncRouteComponent extends React.Component <{}, {Component: any}> {
-    constructor(props: {}) {
+interface AsyncRouteComponentState {
+  Component: any;
+}
+
+const AsyncRouteComponent = (loader: () => any) => {
+  class AsyncRouteComponent extends React.Component <{}, AsyncRouteComponentState>{
+    constructor(props: any) {
       super(props);
 
       this.state = {
@@ -11,7 +15,7 @@ const AsyncRouteComponent = (loader: any) => {
     }
 
     async componentDidMount() {
-        const { default: Component } = await loader();
+        const { default: Component }  = await loader();
 
         this.setState({ Component: Component });
     }
