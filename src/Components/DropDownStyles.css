@@ -1,12 +1,18 @@
-.drop-active {
-    display: block;
-    height: 100px;
+#drop-down {
     overflow-x: auto;
-    transition: all linear 1s;
+    transition: height 200ms linear;
+    width: 200px;
+    margin: 0px auto;
 }
 
-.drop-deactive {
-    display: none;
+.slide-in {
+    height: 100px;
+}
+
+.slide-out {
     height: 0px;
-    transition: all linear 1s;
+} 
+
+.species-ul {
+    list-style: none;
 }
