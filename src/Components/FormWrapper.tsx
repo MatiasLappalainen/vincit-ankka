@@ -48,7 +48,7 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
       <form className="form-inline form-positioner">
       <button className="btn btn-danger" onClick={(e) => this.handleClick(e)}>Add Duck</button>
         <React.Fragment>
-        <DropDownMenu text="drop"/>
+        <DropDownMenu text="Duck Species"/>
         {Component !== null ? <Component
           name="description"
           onChange={this.handleChange}

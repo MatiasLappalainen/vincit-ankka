@@ -5,8 +5,8 @@
 #drop-down {
     overflow-x: auto;
     transition: height 200ms linear;
-    width: 200px;
     margin: 0px auto;
+    
 }
 
 .slide-in {
@@ -19,6 +19,11 @@
 
 .species-ul {
     list-style: none;
+    padding-left: 10px;
+}
+
+.species-ul li {
+    text-align: center;
 }
 
 .btn-fixed {
