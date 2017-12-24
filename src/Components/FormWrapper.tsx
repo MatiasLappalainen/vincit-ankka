@@ -45,19 +45,21 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
   render() {
     const {Component} = this.state;
     return (
-      <form className="form-inline">
+      <form className="form-inline form-positioner">
       <button className="btn btn-danger" onClick={(e) => this.handleClick(e)}>Add Duck</button>
-        <div>
+        <React.Fragment>
+        <DropDownMenu text="drop"/>
         {Component !== null ? <Component
           name="description"
           onChange={this.handleChange}
           variant="form-control"
           value={this.state.description}
           type="text"
-        /> : <h1>Loading</h1>}
+          placeholder="Description"
+        /> : <React.Fragment />}
         <button className="btn btn-primary" onClick={(e) => this.handleSubmit(e)}>Submit</button>
-          <DropDownMenu text="drop"/>
-        </div>
+          
+        </React.Fragment>
       </form>
     );
   }

@@ -4,14 +4,22 @@ type TextFieldProps = {
     name: string;
     value: string;
     type?: string;
-    variant: string
+    variant: string;
+    placeholder: string;
     onChange(e: React.FormEvent<HTMLInputElement>): void;
 };
 
-const TextField: React.SFC<TextFieldProps> = ({name, onChange, value, type, variant}) => {
+const TextField: React.SFC<TextFieldProps> = ({name, onChange, value, type, variant, placeholder}) => {
     
     return(
-        <input name={name} className={variant} type="text" value={value} onChange={onChange} />
+        <input 
+            placeholder={placeholder} 
+            name={name} 
+            className={variant} 
+            type="text" 
+            value={value} 
+            onChange={onChange} 
+        />
     );
 };
 

@@ -69,7 +69,7 @@ class DropDownMenu extends React.Component<DropDownProps, DropDownState> {
       <div
         onMouseEnter={() => this.handleHover()}
         onMouseLeave={() => this.handleLeave()}
-        className="btn"
+        className="btn btn-fixed"
       >
         <h1 className="btn btn-primary">{this.props.text}</h1>
         <div id="drop-down" className={active ? 'slide-in' : 'slide-out'}>
