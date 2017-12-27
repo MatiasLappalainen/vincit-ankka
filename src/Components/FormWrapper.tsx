@@ -1,64 +1,97 @@
 import * as React from "react";
-import * as AsyncRouteComponent from './AsyncRouteComponent';
-import DropDownMenu from './DropDrownMenu';
+import axios from 'axios';
 
+import DropDownMenu from './DropDrownMenu';
+import TextField from './TextField';
 
 interface FormWrapperState {
   description: string;
-  Component: any;
+  count: number;
+  species: string | undefined;
 }
 
 class FormWrapper extends React.Component<{}, FormWrapperState> {
-  constructor(props: any) {
+  constructor(props: {}) {
     super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-
     this.state = {
       description: '',
-      Component: null,
+      count: 1,
+      species: undefined
     };
+    this.handleChange = this.handleChange.bind(this);    
   }
 
   // Handle Changes on textField
   handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
-    const value: string = target.value;
+    let value: string | number = target.value;
     const name: any = target.name;
+
+    if (name === 'count') {
+      value = Number(value);
+    }
     this.setState({
       [name]: value
-    });
-  }
-  // Load form
-  handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const TextField = AsyncRouteComponent.default(() => import('./TextField'));
-    this.setState({
-      Component: TextField
     });
   }
   // Send data to checkData function
   handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    const currentTime = new Date();
+
+    const finalDate = currentTime.toISOString().split('.')[0] + 'Z';
+
+    if (Number.isInteger(this.state.count)) {
+      axios.post('http://localhost:3001/sightings', {
+        dateTime: finalDate,
+        description: this.state.description,
+        count: this.state.count,
+        species: this.state.species
+      })
+      .then(response => {
+        return response;
+      })
+      .catch(err => {
+        return err;
+      });
+    }else{
+      
+    }
+
+  }
+
+  handleClick(e: React.MouseEvent<HTMLLIElement>) {
+    const name = e.currentTarget.id;
+    console.log(name);
+    this.setState({
+      species: name
+    });
+
   }
 
   render() {
-    const {Component} = this.state;
+    const {description, count} = this.state;
     return (
       <form className="form-inline form-positioner">
-      <button className="btn btn-danger" onClick={(e) => this.handleClick(e)}>Add Duck</button>
         <React.Fragment>
-        <DropDownMenu text="Duck Species"/>
-        {Component !== null ? <Component
+        <DropDownMenu text="Duck Species" handleClick={(e) => this.handleClick(e)}/>
+        <TextField
           name="description"
           onChange={this.handleChange}
           variant="form-control"
-          value={this.state.description}
+          value={description}
           type="text"
           placeholder="Description"
-        /> : <React.Fragment />}
+        />
+        <TextField 
+          name="count"
+          onChange={this.handleChange}
+          variant="form-control"
+          value={count}
+          type="number"
+          placeholder="How many ducks"
+        />
         <button className="btn btn-primary" onClick={(e) => this.handleSubmit(e)}>Submit</button>
-          
         </React.Fragment>
       </form>
     );

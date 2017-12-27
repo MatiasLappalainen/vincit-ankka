@@ -10,6 +10,7 @@ interface DataTypes {
 
 interface DropDownProps {
   text: string;
+  handleClick(e: React.MouseEvent<HTMLLIElement>): void;
 }
 
 interface DropDownState {
@@ -65,19 +66,29 @@ class DropDownMenu extends React.Component<DropDownProps, DropDownState> {
 
   render() {
     const { active, data } = this.state;
+    const { text, handleClick} = this.props;
     return (
       <div
         onMouseEnter={() => this.handleHover()}
         onMouseLeave={() => this.handleLeave()}
         className="btn btn-fixed"
       >
-        <h1 className="btn btn-primary">{this.props.text}</h1>
+        <h1 className="btn btn-primary">{text}</h1>
         <div id="drop-down" className={active ? 'slide-in' : 'slide-out'}>
 
           {data.length > 1 ?
-            <ul className="species-ul">{data.map(item => <li key={item.name}>{item.name}</li>)}</ul>
+            <ul className="species-ul">
+            {data.map(item => 
+              <li 
+                key={item.name} 
+                onClick={handleClick}
+                id={item.name}
+              >
+                {item.name}
+              </li>)}
+            </ul>
            : 
-            <div>loadgin</div>
+            <div>loading</div>
           }
         </div>
       </div>

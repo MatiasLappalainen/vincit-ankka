@@ -1,19 +1,25 @@
 import * as React from 'react';
 
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from './Components/Home';
-import FormWrapper from './Components/FormWrapper';
+import * as AsyncRouteComponent from './Components/AsyncRouteComponent';
 
-
-class App extends React.Component {
+interface AppState {
+  Component: any;
+  data: any[];
+  error: string;
+}
+class App extends React.Component<{}, AppState> {
 
   constructor(props: {}) {
     super(props);
 
     this.state = {
       data: [],
-      error: 'null'
+      error: 'null',
+      Component: null,
     };
   }
 
@@ -24,11 +30,21 @@ class App extends React.Component {
 
   }
 
+
+  handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  e.preventDefault();
+  const TextField = AsyncRouteComponent.default(() => import('./Components/FormWrapper'));
+  this.setState({
+    Component: TextField
+  });
+}
   render() {
+    const { Component } = this.state;
     return (
       <div className="App container">
         <Home />
-        <FormWrapper />
+        {Component !== null ? <Component /> : <React.Fragment />}
+        <button className="btn btn-danger" onClick={(e) => this.handleClick(e)}>Add Duck</button>
       </div>
     );
   }

@@ -1,37 +1,35 @@
 .drop-down-parent {
-
 }
 
 #drop-down {
-    overflow-x: auto;
-    transition: height 200ms linear;
-    margin: 0px auto;
-    
+  overflow-x: auto;
+  transition: height 200ms linear;
+  margin: 0px auto;
 }
 
 .slide-in {
-    height: 100px;
+  height: 100px;
 }
 
 .slide-out {
-    height: 0px;
-} 
+  height: 0px;
+}
 
 .species-ul {
-    list-style: none;
-    padding-left: 10px;
+  list-style: none;
+  padding-left: 10px;
 }
 
 .species-ul li {
-    text-align: center;
+  text-align: center;
 }
 
 .btn-fixed {
-    padding: 0;
-    border: 0;
-    display: inline-grid;
+  padding: 0;
+  border: 0;
+  display: inline-grid;
 }
 
 .form-positioner {
-    align-items: flex-start;
+  align-items: flex-start;
 }
