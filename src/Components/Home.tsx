@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from "axios";
-import Tabled from './Table';
+import Tabled from "./Table";
 
 interface DataTypes {
   id?: string;

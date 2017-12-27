@@ -1,7 +1,6 @@
 import * as React from "react";
 import axios from "axios";
 
-
 import "./DropDownStyles.css";
 
 interface DataTypes {
@@ -66,7 +65,7 @@ class DropDownMenu extends React.Component<DropDownProps, DropDownState> {
 
   render() {
     const { active, data } = this.state;
-    const { text, handleClick} = this.props;
+    const { text, handleClick } = this.props;
     return (
       <div
         onMouseEnter={() => this.handleHover()}
@@ -74,23 +73,18 @@ class DropDownMenu extends React.Component<DropDownProps, DropDownState> {
         className="btn btn-fixed"
       >
         <h1 className="btn btn-primary">{text}</h1>
-        <div id="drop-down" className={active ? 'slide-in' : 'slide-out'}>
-
-          {data.length > 1 ?
+        <div id="drop-down" className={active ? "slide-in" : "slide-out"}>
+          {data.length > 1 ? (
             <ul className="species-ul">
-            {data.map(item => 
-              <li 
-                key={item.name} 
-                onClick={handleClick}
-                id={item.name}
-              >
-                {item.name}
-              </li>)
-            }
+              {data.map(item => (
+                <li key={item.name} onClick={handleClick} id={item.name}>
+                  {item.name}
+                </li>
+              ))}
             </ul>
-           : 
+          ) : (
             <div>loading</div>
-          }
+          )}
         </div>
       </div>
     );

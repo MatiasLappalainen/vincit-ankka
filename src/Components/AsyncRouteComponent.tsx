@@ -4,12 +4,12 @@ interface AsyncRouteComponentState {
   Component: any;
 }
 
-const AsyncRouteComponent = (loader: () => any) => {
+const AsyncRouteComponent = (loader: () => void | any)  => {
   class AsyncRouteComponent extends React.Component<
     {},
     AsyncRouteComponentState
   > {
-    constructor(props: any) {
+    constructor(props: {}) {
       super(props);
 
       this.state = {
