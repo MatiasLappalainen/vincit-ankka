@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 type TextFieldProps = {
   name: string;
@@ -25,10 +25,10 @@ const TextField: React.SFC<TextFieldProps> = props => {
 };
 
 TextField.defaultProps = {
-  name: "input",
-  type: "text",
-  value: "Hello",
-  variant: "form-control"
+  name: 'input',
+  type: 'text',
+  value: 'Hello',
+  variant: 'form-control'
 };
 
 export default TextField;

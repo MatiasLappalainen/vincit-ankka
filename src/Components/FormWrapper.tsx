@@ -1,10 +1,10 @@
-import * as React from "react";
-import axios from "axios";
+import * as React from 'react';
+import axios from 'axios';
 
-import DropDownMenu from "./DropDrownMenu";
-import TextField from "./TextField";
+import DropDownMenu from './DropDrownMenu';
+import TextField from './TextField';
 
-import { apiFormat } from "./utils/time";
+import { apiFormat } from './utils/time';
 
 interface FormWrapperState {
   description: string;
@@ -16,9 +16,9 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      description: "",
+      description: '',
       count: 1,
-      species: "Select Species"
+      species: 'Select Species'
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -29,13 +29,13 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
     let value: string | number = target.value;
     const name: any = target.name;
     // Change count to number since html inputs are stupid
-    if (name === "count") {
+    if (name === 'count') {
       value = Number(value);
     }
     this.setState({
       [name]: value
     });
-  };
+  }
   // Send data to checkData function
   handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -45,7 +45,7 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
 
     if (Number.isInteger(this.state.count)) {
       axios
-        .post("http://localhost:3001/sightings", {
+        .post('http://localhost:3001/sightings', {
           dateTime: apiDate,
           description: this.state.description,
           count: this.state.count,
@@ -58,9 +58,10 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
           return err;
         });
     } else {
-      throw new Error("we cannot handle this man");
+      throw new Error('we cannot handle this man');
     }
-  };
+  }
+
   // Get the specie from dropdown menu
   handleClick(e: React.MouseEvent<HTMLLIElement>) {
     const name = e.currentTarget.id;

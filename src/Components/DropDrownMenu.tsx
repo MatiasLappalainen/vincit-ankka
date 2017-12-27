@@ -1,7 +1,7 @@
-import * as React from "react";
-import axios from "axios";
+import * as React from 'react';
+import axios from 'axios';
 
-import "./DropDownStyles.css";
+import './DropDownStyles.css';
 
 interface DataTypes {
   name?: string;
@@ -25,23 +25,22 @@ class DropDownMenu extends React.Component<DropDownProps, DropDownState> {
     this.state = {
       active: false,
       data: [],
-      error: "null"
+      error: 'null'
     };
   }
 
   componentDidMount() {
     axios({
-      url: "http://localhost:3001/species",
+      url: 'http://localhost:3001/species',
       timeout: 2000,
-      method: "get",
-      responseType: "json"
+      method: 'get',
+      responseType: 'json'
     })
       .then(res => {
-        console.log(res);
         const data = res.data;
         this.setState({
           data,
-          error: "null"
+          error: 'null'
         });
       })
       .catch(err => {
@@ -73,7 +72,7 @@ class DropDownMenu extends React.Component<DropDownProps, DropDownState> {
         className="btn btn-fixed"
       >
         <h1 className="btn btn-primary">{text}</h1>
-        <div id="drop-down" className={active ? "slide-in" : "slide-out"}>
+        <div id="drop-down" className={active ? 'slide-in' : 'slide-out'}>
           {data.length > 1 ? (
             <ul className="species-ul">
               {data.map(item => (

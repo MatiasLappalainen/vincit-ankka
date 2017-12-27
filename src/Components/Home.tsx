@@ -1,6 +1,6 @@
-import * as React from "react";
-import axios from "axios";
-import Tabled from "./Table";
+import * as React from 'react';
+import axios from 'axios';
+import Tabled from './Table';
 
 interface DataTypes {
   id?: string;
@@ -21,22 +21,22 @@ class HomePage extends React.Component<{}, AppState> {
 
     this.state = {
       data: [],
-      error: "null"
+      error: 'null'
     };
   }
   componentDidMount() {
     axios({
-      url: "http://localhost:3001/sightings",
+      url: 'http://localhost:3001/sightings',
       timeout: 20000,
-      method: "get",
-      responseType: "json"
+      method: 'get',
+      responseType: 'json'
     })
       // Pistä data state:en
       .then(response => {
         const data = response.data;
         this.setState({
           data,
-          error: "null"
+          error: 'null'
         });
       })
       .catch(error => {
