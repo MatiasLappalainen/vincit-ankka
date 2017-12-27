@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { readFormat } from './utils/time';
+
 interface DataTypes {
   id?: string;
   species?: string;
@@ -45,7 +47,7 @@ class Tabled extends React.Component <TabledProps, TabledState> {
               <th scope="row">{item.id}</th>
               <td>{item.species}</td>
               <td>{item.description}</td>
-              <td>{item.dateTime}</td>
+              <td>{readFormat(item.dateTime)}</td>
               <td>{item.count}</td>
             </tr>
           ))}

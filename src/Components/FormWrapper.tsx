@@ -4,10 +4,12 @@ import axios from 'axios';
 import DropDownMenu from './DropDrownMenu';
 import TextField from './TextField';
 
+import { apiFormat } from './utils/time';
+
 interface FormWrapperState {
   description: string;
   count: number;
-  species: string | undefined;
+  species: string;
 }
 
 class FormWrapper extends React.Component<{}, FormWrapperState> {
@@ -16,7 +18,7 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
     this.state = {
       description: '',
       count: 1,
-      species: undefined
+      species: 'Select Species'
     };
     this.handleChange = this.handleChange.bind(this);    
   }
@@ -26,7 +28,7 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
     const target = e.currentTarget;
     let value: string | number = target.value;
     const name: any = target.name;
-
+    // Change count to number since html inputs are stupid
     if (name === 'count') {
       value = Number(value);
     }
@@ -37,13 +39,13 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
   // Send data to checkData function
   handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const currentTime = new Date();
+    const date = new Date();
 
-    const finalDate = currentTime.toISOString().split('.')[0] + 'Z';
+    const apiDate = apiFormat(date);
 
     if (Number.isInteger(this.state.count)) {
       axios.post('http://localhost:3001/sightings', {
-        dateTime: finalDate,
+        dateTime: apiDate,
         description: this.state.description,
         count: this.state.count,
         species: this.state.species
@@ -55,18 +57,16 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
         return err;
       });
     }else{
-      
+      throw new Error('we cannot handle this man');
     }
 
   }
-
+  // Get the specie from dropdown menu
   handleClick(e: React.MouseEvent<HTMLLIElement>) {
     const name = e.currentTarget.id;
-    console.log(name);
     this.setState({
       species: name
     });
-
   }
 
   render() {
@@ -74,7 +74,7 @@ class FormWrapper extends React.Component<{}, FormWrapperState> {
     return (
       <form className="form-inline form-positioner">
         <React.Fragment>
-        <DropDownMenu text="Duck Species" handleClick={(e) => this.handleClick(e)}/>
+        <DropDownMenu text={this.state.species} handleClick={(e) => this.handleClick(e)}/>
         <TextField
           name="description"
           onChange={this.handleChange}
