@@ -22,6 +22,11 @@
 
 .species-ul li {
   text-align: center;
+  padding: 5px 5px;
+}
+
+.species-ul li:active {
+    background-color: blue;
 }
 
 .btn-fixed {

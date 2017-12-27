@@ -85,7 +85,8 @@ class DropDownMenu extends React.Component<DropDownProps, DropDownState> {
                 id={item.name}
               >
                 {item.name}
-              </li>)}
+              </li>)
+            }
             </ul>
            : 
             <div>loading</div>
