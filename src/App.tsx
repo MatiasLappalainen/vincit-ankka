@@ -12,7 +12,6 @@ interface AppState {
 class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
-
     this.state = {
       Component: null
     };
@@ -26,7 +25,6 @@ class App extends React.Component<{}, AppState> {
       Component: TextField
     });
   }
-  
   render() {
     const { Component } = this.state;
     return (
