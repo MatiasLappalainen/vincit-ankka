@@ -9,8 +9,12 @@ import * as AsyncRouteComponent from './Components/AsyncRouteComponent';
 interface AppState {
   Component: any;
 }
-class App extends React.Component<{}, AppState> {
-  constructor(props: {}) {
+interface AppProps {
+  host: string
+}
+
+class App extends React.Component<AppProps, AppState> {
+  constructor(props: AppProps) {
     super(props);
     this.state = {
       Component: null
@@ -29,8 +33,8 @@ class App extends React.Component<{}, AppState> {
     const { Component } = this.state;
     return (
       <div className="App container">
-        <Home />
-        {Component !== null ? <Component /> : <React.Fragment />}
+        <Home host={this.props.host }/>
+        {Component !== null ? <Component host={this.props.host} /> : <React.Fragment />}
         <button className="btn btn-danger" onClick={e => this.handleClick(e)}>
           Add Duck
         </button>

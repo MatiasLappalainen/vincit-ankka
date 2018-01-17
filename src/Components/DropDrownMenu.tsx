@@ -10,6 +10,7 @@ interface DataTypes {
 interface DropDownProps {
   text: string;
   handleClick(e: React.MouseEvent<HTMLLIElement>): void;
+  host: string;
 }
 
 interface DropDownState {
@@ -31,7 +32,7 @@ class DropDownMenu extends React.Component<DropDownProps, DropDownState> {
 
   componentDidMount() {
     axios({
-      url: 'http://localhost:3001/species',
+      url: `http://${this.props.host}:3001/sightings`,
       timeout: 2000,
       method: 'get',
       responseType: 'json'

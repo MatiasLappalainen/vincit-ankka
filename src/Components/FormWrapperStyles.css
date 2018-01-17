@@ -1,0 +1,8 @@
+.center {
+    width: 100%;
+    display: inline-flex;
+}
+
+.form-positioner {
+    margin: 0 auto;
+}

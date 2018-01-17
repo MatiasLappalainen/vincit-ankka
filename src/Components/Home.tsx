@@ -15,18 +15,23 @@ interface AppState {
   error: string;
 }
 
-class HomePage extends React.Component<{}, AppState> {
-  constructor(props: {}) {
+interface AppProps {
+  host: string
+}
+
+class HomePage extends React.Component<AppProps, AppState> {
+  constructor(props: AppProps) {
     super(props);
 
     this.state = {
       data: [],
       error: 'null'
     };
+    console.log(this.props.host, `${this.props.host}:3001/sightings`)
   }
   componentDidMount() {
     axios({
-      url: 'http://localhost:3001/sightings',
+      url: `http://${this.props.host}:3001/sightings`,
       timeout: 20000,
       method: 'get',
       responseType: 'json'
