@@ -32,7 +32,7 @@ class DropDownMenu extends React.Component<DropDownProps, DropDownState> {
 
   componentDidMount() {
     axios({
-      url: `http://${this.props.host}:3001/sightings`,
+      url: `http://${this.props.host}:3001/species`,
       timeout: 2000,
       method: 'get',
       responseType: 'json'

@@ -2,6 +2,7 @@
   overflow-x: auto;
   transition: height 200ms linear;
   margin: 0px auto;
+  width: 100%;
 }
 
 .slide-in {
@@ -20,10 +21,12 @@
 .species-ul li {
   text-align: center;
   padding: 5px 5px;
+  width: 100px;
 }
 
 .species-ul li:active {
     background-color: blue;
+    color: white;
 }
 
 .btn-fixed {

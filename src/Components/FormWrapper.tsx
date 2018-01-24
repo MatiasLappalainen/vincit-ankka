@@ -3,7 +3,7 @@ import axios from "axios";
 
 import DropDownMenu from "./DropDrownMenu";
 import TextField from "./TextField";
-
+import { checkNulls } from './utils/checkForm'
 import { apiFormat } from "./utils/time";
 
 import './FormWrapperStyles.css';
@@ -12,6 +12,7 @@ interface FormWrapperState {
   description: string;
   count: number;
   species: string;
+  formValid: Boolean
 }
 
 interface FormWrapperProps {
@@ -24,7 +25,8 @@ class FormWrapper extends React.Component<FormWrapperProps, FormWrapperState> {
     this.state = {
       description: "",
       count: 1,
-      species: "Select Species"
+      species: "Select Species",
+      formValid: true
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -48,8 +50,10 @@ class FormWrapper extends React.Component<FormWrapperProps, FormWrapperState> {
     const date = new Date();
 
     const apiDate = apiFormat(date);
-
-    if (Number.isInteger(this.state.count)) {
+    if(checkNulls(this.state.species, this.state.count)  !== false ){
+      this.setState({
+        formValid: true
+      })
       axios
         .post("http://localhost:3001/sightings", {
           dateTime: apiDate,
@@ -73,9 +77,11 @@ class FormWrapper extends React.Component<FormWrapperProps, FormWrapperState> {
           });
           return err;
         });
-    } else {
-      throw new Error("we cannot handle this man");
-    }
+      }else{
+        this.setState({
+          formValid: false
+        })
+      }
   };
 
   // Get the specie from dropdown menu
@@ -121,6 +127,7 @@ class FormWrapper extends React.Component<FormWrapperProps, FormWrapperState> {
           </button>
         </React.Fragment>
       </form>
+      {this.state.formValid ? <React.Fragment></React.Fragment> : <div className="error">Form isn't valid</div>}
       </div>
     );
   }
