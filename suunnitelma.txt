@@ -1,7 +1,0 @@
-- Yksi sivu
-    -Sisältö:
-        -Table jossa data apista
-        -Form jossa kaikki vaadittavat input elementit
-    -functiot
-        -UpdateOnPost
-            -Kun käyttäjä postaa api:in, päivitä client data
