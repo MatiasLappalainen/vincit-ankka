@@ -52,11 +52,15 @@ class HomePage extends React.Component<AppProps, AppState> {
       });
   }
 
+  onClick(){
+    console.log("Hello Bois")
+  }
+
   render() {
     const { data } = this.state;
     return (
       <React.Fragment>
-        {data.length > 1 ? <Tabled data={this.state.data} /> : <h1>Loading</h1>}
+        {data.length > 1 ? <Tabled data={data} onClick={() => this.onClick()}/> : <h1>Loading</h1>}
       </React.Fragment>
     );
   }

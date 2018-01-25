@@ -12,6 +12,7 @@ interface DataTypes {
 
 interface TabledProps {
   data: DataTypes[];
+  onClick: () => void
 }
 
 interface TabledState {
@@ -30,7 +31,7 @@ class Tabled extends React.Component<TabledProps, TabledState> {
     const { data } = this.state;
     return (
       <table className="table table-responsive">
-        <caption>Ducks</caption>
+        <caption><button onClick={this.props.onClick}>Sort</button></caption>
         <thead>
           <tr>
             <th scope="col">Id</th>
