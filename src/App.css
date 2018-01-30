@@ -19,6 +19,10 @@
 .App-intro {
   font-size: large;
 }
+.table {
+  height: fit-content;
+  overflow: auto;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
