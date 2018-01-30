@@ -3,7 +3,7 @@ import axios from "axios";
 
 import DropDownMenu from "./DropDrownMenu";
 import TextField from "./TextField";
-import { checkNulls } from './utils/checkForm'
+import { checkNulls } from './utils/checkForm';
 import { apiFormat } from "./utils/time";
 
 import './FormWrapperStyles.css';
@@ -12,11 +12,11 @@ interface FormWrapperState {
   description: string;
   count: number;
   species: string;
-  formValid: Boolean
+  formValid: Boolean;
 }
 
 interface FormWrapperProps {
-  host: string
+  host: string;
 }
 
 class FormWrapper extends React.Component<FormWrapperProps, FormWrapperState> {
@@ -50,12 +50,13 @@ class FormWrapper extends React.Component<FormWrapperProps, FormWrapperState> {
     const date = new Date();
 
     const apiDate = apiFormat(date);
-    if(checkNulls(this.state.species, this.state.count)  !== false ){
+    if (checkNulls(this.state.species, this.state.count)  !== false ) {
       this.setState({
         formValid: true
-      })
+      }
+    );
       axios
-        .post("http://localhost:3001/sightings", {
+        .post(`http://${this.props.host}:3001/sightings`, {
           dateTime: apiDate,
           description: this.state.description,
           count: this.state.count,
@@ -73,16 +74,16 @@ class FormWrapper extends React.Component<FormWrapperProps, FormWrapperState> {
           this.setState({
             description: "",
             count: 1,
-            species: "Select Species"
+            species: 'Select Species'
           });
           return err;
         });
-      }else{
+      } else {
         this.setState({
           formValid: false
-        })
+        });
       }
-  };
+  }
 
   // Get the specie from dropdown menu
   handleClick(e: React.MouseEvent<HTMLLIElement>) {
@@ -127,7 +128,7 @@ class FormWrapper extends React.Component<FormWrapperProps, FormWrapperState> {
           </button>
         </React.Fragment>
       </form>
-      {this.state.formValid ? <React.Fragment></React.Fragment> : <div className="error">Form isn't valid</div>}
+      {this.state.formValid ? <React.Fragment /> : <div className="error">Form isn't valid</div>}
       </div>
     );
   }

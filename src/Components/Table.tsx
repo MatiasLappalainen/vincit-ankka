@@ -1,18 +1,19 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { readFormat } from './utils/time';
+import { readFormat, readFormatTime } from "./utils/time";
 
 interface DataTypes {
   id?: string;
   species?: string;
   description?: string;
-  dateTime?: string;
+  dateTime: Date;
   count?: number;
 }
 
 interface TabledProps {
   data: DataTypes[];
-  onClick: () => void
+  onClickAsc: () => void;
+  onClickDesc: () => void;
 }
 
 interface TabledState {
@@ -31,13 +32,17 @@ class Tabled extends React.Component<TabledProps, TabledState> {
     const { data } = this.state;
     return (
       <table className="table table-responsive">
-        <caption><button onClick={this.props.onClick}>Sort</button></caption>
+        <caption>
+          <button onClick={this.props.onClickAsc}>Oldest</button>
+          <button onClick={this.props.onClickDesc}>Newest</button>
+        </caption>
         <thead>
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Species</th>
             <th scope="col">Description</th>
-            <th scope="col">DateTime</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
             <th scope="col">Count</th>
           </tr>
         </thead>
@@ -48,6 +53,7 @@ class Tabled extends React.Component<TabledProps, TabledState> {
               <td>{item.species}</td>
               <td>{item.description}</td>
               <td>{readFormat(item.dateTime)}</td>
+              <td>{readFormatTime(item.dateTime)}</td>
               <td>{item.count}</td>
             </tr>
           ))}

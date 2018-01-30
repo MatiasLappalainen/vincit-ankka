@@ -1,12 +1,14 @@
-import * as React from 'react';
-import axios from 'axios';
-import Tabled from './Table';
+import * as React from "react";
+import axios from "axios";
+import Tabled from "./Table";
+import { sortAsc, sortDesc } from "./utils/dateSorting";
+/* import { toDateFormat } from './utils/time'; */
 
 interface DataTypes {
   id?: string;
   species?: string;
   description?: string;
-  dateTime?: string;
+  dateTime: Date;
   count?: number;
 }
 
@@ -16,7 +18,7 @@ interface AppState {
 }
 
 interface AppProps {
-  host: string
+  host: string;
 }
 
 class HomePage extends React.Component<AppProps, AppState> {
@@ -25,23 +27,22 @@ class HomePage extends React.Component<AppProps, AppState> {
 
     this.state = {
       data: [],
-      error: 'null'
+      error: "null"
     };
-    console.log(this.props.host, `${this.props.host}:3001/sightings`)
   }
   componentDidMount() {
     axios({
       url: `http://${this.props.host}:3001/sightings`,
       timeout: 20000,
-      method: 'get',
-      responseType: 'json'
+      method: "get",
+      responseType: "json"
     })
       // Pistä data state:en
       .then(response => {
         const data = response.data;
         this.setState({
           data,
-          error: 'null'
+          error: "null"
         });
       })
       .catch(error => {
@@ -52,15 +53,30 @@ class HomePage extends React.Component<AppProps, AppState> {
       });
   }
 
-  onClick(){
-    console.log("Hello Bois")
+  onClick() {
+    const { data } = this.state;
+    data.sort(sortAsc);
+    this.setState({ data });
+  }
+  onClickDesc() {
+    const { data } = this.state;
+    data.sort(sortDesc);
+    this.setState({ data });
   }
 
   render() {
     const { data } = this.state;
     return (
       <React.Fragment>
-        {data.length > 1 ? <Tabled data={data} onClick={() => this.onClick()}/> : <h1>Loading</h1>}
+        {data.length > 1 ? (
+          <Tabled
+            data={this.state.data}
+            onClickAsc={() => this.onClick()}
+            onClickDesc={() => this.onClickDesc()}
+          />
+        ) : (
+          <h1>Loading</h1>
+        )}
       </React.Fragment>
     );
   }
