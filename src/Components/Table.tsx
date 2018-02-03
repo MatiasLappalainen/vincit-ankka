@@ -21,20 +21,28 @@ interface TabledState {
 }
 
 class Tabled extends React.Component<TabledProps, TabledState> {
+
   constructor(props: TabledProps) {
     super(props);
     this.state = {
-      data: this.props.data
+      data: []
     };
   }
-
+  componentDidMount() {
+    this.setState({data: this.props.data});
+  }
+  componentWillReceiveProps(nextProps: TabledProps) {
+    this.setState({
+      data: nextProps.data
+    });
+  }
   render() {
     const { data } = this.state;
     return (
       <table className="table table-responsive">
         <caption>
-          <button onClick={this.props.onClickAsc}>Oldest</button>
-          <button onClick={this.props.onClickDesc}>Newest</button>
+          <button className="btn btn-light" onClick={this.props.onClickAsc}>Oldest</button>
+          <button className="btn btn-secondary" onClick={this.props.onClickDesc}>Newest</button>
         </caption>
         <thead>
           <tr>

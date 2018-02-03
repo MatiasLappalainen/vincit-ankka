@@ -1,8 +1,10 @@
 #drop-down {
   overflow-x: auto;
   transition: height 200ms linear;
-  margin: 0px auto;
-  width: 100%;
+  margin: 45px auto;
+  position: absolute;
+  background-color: white;
+  width: 130px;
 }
 
 .slide-in {
@@ -37,4 +39,8 @@
 
 .form-positioner {
   align-items: flex-start;
+}
+
+.btn-dropdown {
+  width: 130px;
 }

@@ -1,20 +1,18 @@
 import * as React from "react";
-
 import DropDownMenu from "./DropDrownMenu";
 import TextField from "./TextField";
 
 import './FormWrapperStyles.css';
 
-
 interface FormWrapperProps {
   host: string;
-  handleChange(e :React.FormEvent<HTMLInputElement>):  void;
-  handleClick(e :React.MouseEvent<HTMLLIElement>):  void;
-  handlePost(e :React.MouseEvent<HTMLButtonElement>):  void;
   description: string;
   species: string;
   count: number;
   formValid: Boolean;
+  handleChange(e: React.FormEvent<HTMLInputElement>):  void;
+  handleClick(e: React.MouseEvent<HTMLLIElement>):  void;
+  handlePost(e: React.MouseEvent<HTMLButtonElement>):  void;
 }
 
 class FormWrapper extends React.Component<FormWrapperProps, {}> {

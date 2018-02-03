@@ -72,7 +72,7 @@ class DropDownMenu extends React.Component<DropDownProps, DropDownState> {
         onMouseLeave={() => this.handleLeave()}
         className="btn btn-fixed"
       >
-        <h1 className="btn btn-primary">{text}</h1>
+        <h1 className="btn btn-primary btn-dropdown">{text}</h1>
         <div id="drop-down" className={active ? 'slide-in' : 'slide-out'}>
           {data.length > 1 ? (
             <ul className="species-ul">

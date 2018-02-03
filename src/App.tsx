@@ -4,14 +4,14 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface AppProps {
-  host: string
+  host: string;
 }
 
 class App extends React.Component<AppProps, {}> {
   render() {
     return (
       <div className="App container">
-        <Home host={this.props.host }/>
+        <Home host={this.props.host}/>
       </div>
     );
   }

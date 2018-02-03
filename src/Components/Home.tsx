@@ -1,11 +1,11 @@
-import * as React from "react";
-import axios from "axios";
-import Tabled from "./Table";
-import { sortAsc, sortDesc } from "./utils/dateSorting";
-import * as AsyncRouteComponent from "./AsyncRouteComponent";
+import * as React from 'react';
+import axios from 'axios';
+import Tabled from './Table';
+import { sortAsc, sortDesc } from './utils/dateSorting';
+import * as AsyncRouteComponent from './AsyncRouteComponent';
 import { checkNulls } from './utils/checkForm';
-import { apiFormat } from "./utils/time";
-
+import { apiFormat } from './utils/time';
+import Footer from './Footer';
 
 interface DataTypes {
   id: string;
@@ -31,17 +31,18 @@ interface AppProps {
   host: string;
 }
 
+
 class HomePage extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
 
     this.state = {
       data: [],
-      error: "null",
+      error: 'null',
       TextField: null,
-      description: "",
+      description: '',
       count: 1,
-      species: "Select Species",
+      species: 'Select Species',
       formValid: true
     };
     this.getData = this.getData.bind(this);
@@ -53,14 +54,14 @@ class HomePage extends React.Component<AppProps, AppState> {
   getData() {
     axios({
       url: `http://${this.props.host}:3001/sightings`,
-      method: "get",
-      responseType: "json"
+      method: 'get',
+      responseType: 'json'
     })
       .then(response => {
         const data = response.data;
         this.setState({
           data,
-          error: "null"
+          error: 'null'
         });
       })
       .catch(error => {
@@ -75,7 +76,6 @@ class HomePage extends React.Component<AppProps, AppState> {
     const { data } = this.state;
     data.sort(sortAsc);
     this.setState({ data });
-    console.log("watwat")
   }
   onClickDesc() {
     const { data } = this.state;
@@ -86,15 +86,16 @@ class HomePage extends React.Component<AppProps, AppState> {
   handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
     let value: string | number = target.value;
+    // Type has to be any since typescript doesn't want to work with me
     const name: any = target.name;
     // Change count to number since html inputs are stupid
-    if (name === "count") {
+    if (name === 'count') {
       value = Number(value);
     }
     this.setState({
       [name]: value
     });
-  };
+  }
 
   handlePost = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -114,17 +115,17 @@ class HomePage extends React.Component<AppProps, AppState> {
         })
         .then(response => {
           this.setState({
-            description: "",
+            description: '',
             count: 1,
-            species: "Select Species"
+            species: 'Select Species'
           });
           this.getData();
         })
         .catch(err => {
           this.setState({
-            description: "",
+            description: '',
             count: 1,
-            species: "Select Species"
+            species: 'Select Species'
           });
         });
     } else {
@@ -144,12 +145,12 @@ class HomePage extends React.Component<AppProps, AppState> {
   handleClick = (e: React.MouseEvent<HTMLButtonElement>)  => {
     e.preventDefault();
     const TextField = AsyncRouteComponent.default(() =>
-      import("./FormWrapper")
+      import('./FormWrapper')
     );
     this.setState({
       TextField: TextField
     });
-  };
+  }
 
   render() {
     const { data, TextField } = this.state;
@@ -181,6 +182,7 @@ class HomePage extends React.Component<AppProps, AppState> {
         <button className="btn btn-danger" onClick={e => this.handleClick(e)}>
           Add Duck
         </button>
+        <Footer />
       </React.Fragment>
     );
   }
